@@ -1,7 +1,10 @@
-# mycode (Project Title)
+# mycode  Python3
 
-One Paragraph of your project description goes here. Describe what you're trying to do.
-What is the purpose of putting up this repo?
+develop API
+data science tools
+machine learning
+API connection / data interaction
+
 
 ## Getting Started
 

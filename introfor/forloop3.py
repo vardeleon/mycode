@@ -9,8 +9,8 @@ farms = [{"name": "NE Farm", "agriculture": ["sheep", "cows", "pigs", "chickens"
 approved_vendors = ["cisco", "juniper", "big_ip"]
 
 # loop across the list called vendors
-for x in vendors:
-    print("\nThe vendor is " + x, end="")   # newline, print current vendor, and end without newline
+for x in farms:
+    print("\nNE Farm  with " + x.get("name"), end="")   # newline, print current vendor, and end without newline
     if x not in approved_vendors:   # if x does not appear within the list approved_vendors
         print(" - NOT AN APPROVED VENDOR!", end="")
 print("\nOur loop has ended.") # print when loop has finished

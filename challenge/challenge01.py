@@ -7,9 +7,19 @@ WEEKLUCK = "http://horoscope-api.herokuapp.com/horoscope/week/"
 
 
 def SUNSIGN():
-    print('Your Weekly Horoscope')
-    SIGN = input("Please enter you horoscope sign--> ")
+    print('\n\n' + 'Your Weekly Horoscope' + '\n\n')
+    f = open('horoscopesigns.data', 'r')
+    file_contents = f.read()
+    print (file_contents)
+    f.close()
+
+    SIGN = str(input("Please enter you horoscope sign--> "))
     SIGN = SIGN.lower()
+    while SIGN  not in ["aries","taurus","gemini","cancer","leo","virgo","libra","scorpio","sagittarius","capricorn","aquarius","pisces"]:
+        print("Entered invalid horoscope sign, Please try again")
+        SIGN = str(input("Pick you horoscope sign: "))
+        SIGN = SIGN.lower()
+    print("You picked {}".format(SIGN))
     return SIGN
 
 

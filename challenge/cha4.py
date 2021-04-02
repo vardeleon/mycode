@@ -15,7 +15,7 @@ def SUNSIGN():
 
     SIGN = str(input("Please enter you horoscope sign--> "))
     SIGN = SIGN.lower()
-    while SIGN  not in ["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"]:
+    while SIGN  not in ["aries","taurus","gemini","cancer","leo","virgo","libra","scorpio","sagittarius","capricorn","aquarius","pisces"]:
         print("Entered invalid horoscope sign, Please try again")
         SIGN = str(input("Pick you horoscope sign: "))
     print("You picked {}".format(SIGN))

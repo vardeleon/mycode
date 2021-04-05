@@ -1,0 +1,92 @@
+#!/usr/bin/python3
+
+import requests
+import crayons
+import pandas as pd
+from os import system, name
+
+
+WEEKLUCK = "http://horoscope-api.herokuapp.com/horoscope/week/"
+
+
+
+def SUNSIGN():
+    print('\n\n' + 'Your Weekly Horoscope' + '\n\n')
+
+    SIGN = str(input("Please enter your zodiac sign--> "))
+    SIGN = SIGN.lower()
+    while SIGN  not in ["aries","taurus","gemini","cancer","leo","virgo","libra","scorpio","sagittarius","capricorn","aquarius","pisces"]:
+        print(crayons.red("Entered invalid zodiac sign, Please try again" + "\n\n"))
+        f = open('horoscopesigns.data', 'r')
+        file_contents = f.read()
+        print (file_contents)
+        f.close()
+
+        SIGN = str(input("Please pick your Zodiac valid  sign: "))
+        SIGN = SIGN.lower()
+        clearscreen() # clear the screen
+        print('\n\n' + 'Your Weekly Horoscope' + '\n\n')
+        
+    clearscreen() # clear the screen
+    print(crayons.green("\n\n" + "Your Zodiac Sign is:  {}".format(SIGN)))
+    return SIGN
+
+
+# define Screen  clear function
+def clearscreen():
+
+    # for windows
+    if name == 'nt':
+        _ = system('cls')
+
+    # for mac and linux
+    else:
+        _ = system('clear')
+
+
+def main():
+     SIGN = SUNSIGN()
+     r = requests.get(WEEKLUCK + SIGN)
+     
+     if r.status_code != 200:
+        print(r.status_code)
+        print(r.json())
+        exit()
+     
+     # Ouput the API request to a JSON file
+     data = r.text
+     f = open("WEEKLUCK.json","w")
+     f.write(data)
+     f.close()
+
+
+
+     # get the JSON API response
+     r = r.json()
+
+     with open("WEEKLUCK.data", "w") as f:
+        # write out title
+        print("\n\n\n")
+        f.write(crayons.blue("Zodiac: ", bold=True) + r.get("sunsign") + "\n\n")
+
+        # write out week
+        f.write(crayons.blue("Week: ", bold=True) + r.get("week") + "\n\n")
+    
+        # write out Horoscope
+        f.write(crayons.blue("Your Horoscope: ", bold=True) + r.get("horoscope") + "\n\n")
+
+ #       # add blank lines
+ #       f.write("\n\n")
+
+     f = open('WEEKLUCK.data', 'r')
+     file_contents = f.read()
+     print (file_contents)
+     f.close()
+
+     json_file = 'WEEKLUCK.json'
+     data_json = pd.read_json(json_file, typ='series')
+     data_json.to_csv("WEEKLUCK.csv")
+     data_json.to_excel('WEEKLUCK.xlsx')
+
+if __name__ == "__main__":
+    main()
